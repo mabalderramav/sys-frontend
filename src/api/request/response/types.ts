@@ -2,20 +2,20 @@
 
 export interface Fabricante {
   id: number;
-  skuFabricante: string;
-  nombreFabricante: string;
+  sku_fabricante: string;
+  nombre_fabricante: string;
 }
 
 export interface Proveedor {
   id: number;
-  skuProveedor: string;
-  nombreProveedor: string;
+  sku_proveedor: string;
+  nombre_proveedor: string;
 }
 
 export interface GrupoProducto {
   id: number;
-  codGrupoProducto: string;
-  nombreGrupoProducto: string;
+  cod_grupo_producto: string;
+  nombre_grupo_producto: string;
 }
 
 export interface UnidadMedida {

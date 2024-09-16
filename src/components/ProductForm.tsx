@@ -111,8 +111,8 @@ const ProductForm: React.FC = () => {
         >
           <option value="">Seleccionar</option>
           {grupos.map((grupo) => (
-            <option key={grupo.codGrupoProducto} value={grupo.codGrupoProducto}>
-              {grupo.nombreGrupoProducto}
+            <option key={grupo.cod_grupo_producto} value={grupo.cod_grupo_producto}>
+              {grupo.nombre_grupo_producto}
             </option>
           ))}
         </select>
@@ -132,7 +132,7 @@ const ProductForm: React.FC = () => {
           <option value="">Seleccionar</option>
           {fabricantes.map((fabricante) => (
             <option key={fabricante.id} value={fabricante.id}>
-              {fabricante.nombreFabricante}
+              {fabricante.nombre_fabricante}
             </option>
           ))}
         </select>
@@ -152,7 +152,7 @@ const ProductForm: React.FC = () => {
           <option value="">Seleccionar</option>
           {proveedores.map((proveedor) => (
             <option key={proveedor.id} value={proveedor.id}>
-              {proveedor.nombreProveedor}
+              {proveedor.nombre_proveedor}
             </option>
           ))}
         </select>
