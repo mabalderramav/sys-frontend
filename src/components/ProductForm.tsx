@@ -53,22 +53,62 @@ const ProductForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>SKU:</label>
-        <input type="text" name="sku" value={formValues.sku} onChange={handleChange} required />
+    <form onSubmit={handleSubmit} className="space-y-4 p-4 max-w-xl mx-auto bg-white shadow-md rounded-lg">
+      <div className="flex flex-col">
+        <label htmlFor="sku" className="mb-1 font-semibold text-left">
+          SKU:
+        </label>
+        <input
+          id="sku"
+          type="text"
+          name="sku"
+          value={formValues.sku}
+          onChange={handleChange}
+          required
+          className="p-2 border border-gray-300 rounded"
+        />
       </div>
-      <div>
-        <label>Nombre:</label>
-        <input type="text" name="nombre" value={formValues.nombre} onChange={handleChange} required />
+
+      <div className="flex flex-col">
+        <label htmlFor="nombre" className="mb-1 font-semibold text-left">
+          Nombre:
+        </label>
+        <input
+          id="nombre"
+          type="text"
+          name="nombre"
+          value={formValues.nombre}
+          onChange={handleChange}
+          required
+          className="p-2 border border-gray-300 rounded"
+        />
       </div>
-      <div>
-        <label>Nombre Extranjero:</label>
-        <input type="text" name="nombreExtranjero" value={formValues.nombreExtranjero || ''} onChange={handleChange} />
+
+      <div className="flex flex-col">
+        <label htmlFor="nombreExtranjero" className="mb-1 font-semibold text-left">
+          Nombre Extranjero:
+        </label>
+        <input
+          id="nombreExtranjero"
+          type="text"
+          name="nombreExtranjero"
+          value={formValues.nombreExtranjero || ''}
+          onChange={handleChange}
+          className="p-2 border border-gray-300 rounded"
+        />
       </div>
-      <div>
-        <label>Código Grupo Producto:</label>
-        <select name="cod_grupo_producto" value={formValues.codGrupoProducto || ''} onChange={handleChange}>
+
+      <div className="flex flex-col">
+        <label htmlFor="cod_grupo_producto" className="mb-1 font-semibold text-left">
+          Código Grupo Producto:
+        </label>
+        <select
+          id="cod_grupo_producto"
+          name="cod_grupo_producto"
+          value={formValues.codGrupoProducto || ''}
+          onChange={handleChange}
+          className="p-2 border border-gray-300 rounded bg-white"
+        >
           <option value="">Seleccionar</option>
           {grupos.map((grupo) => (
             <option key={grupo.codGrupoProducto} value={grupo.codGrupoProducto}>
@@ -77,9 +117,18 @@ const ProductForm: React.FC = () => {
           ))}
         </select>
       </div>
-      <div>
-        <label>Fabricante:</label>
-        <select name="id_fabricante" value={formValues.idFabricante} onChange={handleChange}>
+
+      <div className="flex flex-col">
+        <label htmlFor="id_fabricante" className="mb-1 font-semibold text-left">
+          Fabricante:
+        </label>
+        <select
+          id="id_fabricante"
+          name="id_fabricante"
+          value={formValues.idFabricante}
+          onChange={handleChange}
+          className="p-2 border border-gray-300 rounded bg-white"
+        >
           <option value="">Seleccionar</option>
           {fabricantes.map((fabricante) => (
             <option key={fabricante.id} value={fabricante.id}>
@@ -88,9 +137,18 @@ const ProductForm: React.FC = () => {
           ))}
         </select>
       </div>
-      <div>
-        <label>Proveedor:</label>
-        <select name="id_proveedor" value={formValues.idProveedor} onChange={handleChange}>
+
+      <div className="flex flex-col">
+        <label htmlFor="id_proveedor" className="mb-1 font-semibold text-left">
+          Proveedor:
+        </label>
+        <select
+          id="id_proveedor"
+          name="id_proveedor"
+          value={formValues.idProveedor}
+          onChange={handleChange}
+          className="p-2 border border-gray-300 rounded bg-white"
+        >
           <option value="">Seleccionar</option>
           {proveedores.map((proveedor) => (
             <option key={proveedor.id} value={proveedor.id}>
@@ -99,13 +157,34 @@ const ProductForm: React.FC = () => {
           ))}
         </select>
       </div>
-      <div>
-        <label>Peso:</label>
-        <input type="number" name="peso" value={formValues.peso} onChange={handleChange} step="0.01" required />
+
+      <div className="flex flex-col">
+        <label htmlFor="peso" className="mb-1 font-semibold text-left">
+          Peso:
+        </label>
+        <input
+          id="peso"
+          type="number"
+          name="peso"
+          value={formValues.peso}
+          onChange={handleChange}
+          step="0.01"
+          required
+          className="p-2 border border-gray-300 rounded"
+        />
       </div>
-      <div>
-        <label>Unidad de Medida:</label>
-        <select name="id_unidad_medida" value={formValues.idUnidadMedida} onChange={handleChange}>
+
+      <div className="flex flex-col">
+        <label htmlFor="id_unidad_medida" className="mb-1 font-semibold text-left">
+          Unidad de Medida:
+        </label>
+        <select
+          id="id_unidad_medida"
+          name="id_unidad_medida"
+          value={formValues.idUnidadMedida}
+          onChange={handleChange}
+          className="p-2 border border-gray-300 rounded bg-white"
+        >
           <option value="">Seleccionar</option>
           {UNIDADES.map((unidad) => (
             <option key={unidad.id} value={unidad.id}>
@@ -114,26 +193,57 @@ const ProductForm: React.FC = () => {
           ))}
         </select>
       </div>
-      <div>
-        <label>Precio Lista:</label>
+
+      <div className="flex flex-col">
+        <label htmlFor="precio_lista" className="mb-1 font-semibold text-left">
+          Precio Lista:
+        </label>
         <input
+          id="precio_lista"
           type="number"
           name="precio_lista"
           value={formValues.precioLista}
           onChange={handleChange}
           step="0.01"
           required
+          className="p-2 border border-gray-300 rounded"
         />
       </div>
-      <div>
-        <label>Código Barra:</label>
-        <input type="text" name="cod_barra" value={formValues.codBarra || ''} onChange={handleChange} />
+
+      <div className="flex flex-col">
+        <label htmlFor="cod_barra" className="mb-1 font-semibold text-left">
+          Código Barra:
+        </label>
+        <input
+          id="cod_barra"
+          type="text"
+          name="cod_barra"
+          value={formValues.codBarra || ''}
+          onChange={handleChange}
+          className="p-2 border border-gray-300 rounded"
+        />
       </div>
-      <div>
-        <label>SKU Alternante:</label>
-        <input type="text" name="sku_alternante" value={formValues.skuAlternante || ''} onChange={handleChange} />
+
+      <div className="flex flex-col">
+        <label htmlFor="sku_alternante" className="mb-1 font-semibold text-left">
+          SKU Alternante:
+        </label>
+        <input
+          id="sku_alternante"
+          type="text"
+          name="sku_alternante"
+          value={formValues.skuAlternante || ''}
+          onChange={handleChange}
+          className="p-2 border border-gray-300 rounded"
+        />
       </div>
-      <button type="submit">Registrar Producto</button>
+
+      <button
+        type="submit"
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        Registrar Producto
+      </button>
     </form>
   );
 };
