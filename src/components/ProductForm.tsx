@@ -18,15 +18,15 @@ const ProductForm: React.FC = () => {
   const [formValues, setFormValues] = useState<ProductRequest>({
     sku: '',
     nombre: '',
-    nombre_extranjero: '',
-    cod_grupo_producto: '',
-    id_fabricante: 0,
-    id_proveedor: 0,
+    nombreExtranjero: '',
+    codGrupoProducto: '',
+    idFabricante: 0,
+    idProveedor: 0,
     peso: 0,
-    id_unidad_medida: 0,
-    precio_lista: 0,
-    cod_barra: '',
-    sku_alternante: ''
+    idUnidadMedida: 0,
+    precioLista: 0,
+    codBarra: '',
+    skuAlternante: ''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -84,27 +84,27 @@ const ProductForm: React.FC = () => {
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="nombre_extranjero" className="mb-1 font-semibold text-left">
+        <label htmlFor="nombreExtranjero" className="mb-1 font-semibold text-left">
           Nombre Extranjero:
         </label>
         <input
-          id="nombre_extranjero"
+          id="nombreExtranjero"
           type="text"
-          name="nombre_extranjero"
-          value={formValues.nombre_extranjero || ''}
+          name="nombreExtranjero"
+          value={formValues.nombreExtranjero || ''}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded"
         />
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="cod_grupo_producto" className="mb-1 font-semibold text-left">
+        <label htmlFor="codGrupoProducto" className="mb-1 font-semibold text-left">
           Código Grupo Producto:
         </label>
         <select
-          id="cod_grupo_producto"
-          name="cod_grupo_producto"
-          value={formValues.cod_grupo_producto || ''}
+          id="codGrupoProducto"
+          name="codGrupoProducto"
+          value={formValues.codGrupoProducto || ''}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded bg-white"
         >
@@ -118,13 +118,13 @@ const ProductForm: React.FC = () => {
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="id_fabricante" className="mb-1 font-semibold text-left">
+        <label htmlFor="idFabricante" className="mb-1 font-semibold text-left">
           Fabricante:
         </label>
         <select
-          id="id_fabricante"
-          name="id_fabricante"
-          value={formValues.id_fabricante}
+          id="idFabricante"
+          name="idFabricante"
+          value={formValues.idFabricante}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded bg-white"
         >
@@ -138,13 +138,13 @@ const ProductForm: React.FC = () => {
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="id_proveedor" className="mb-1 font-semibold text-left">
+        <label htmlFor="idProveedor" className="mb-1 font-semibold text-left">
           Proveedor:
         </label>
         <select
-          id="id_proveedor"
-          name="id_proveedor"
-          value={formValues.id_proveedor}
+          id="idProveedor"
+          name="idProveedor"
+          value={formValues.idProveedor}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded bg-white"
         >
@@ -174,13 +174,13 @@ const ProductForm: React.FC = () => {
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="id_unidad_medida" className="mb-1 font-semibold text-left">
+        <label htmlFor="idUnidadMedida" className="mb-1 font-semibold text-left">
           Unidad de Medida:
         </label>
         <select
-          id="id_unidad_medida"
-          name="id_unidad_medida"
-          value={formValues.id_unidad_medida}
+          id="idUnidadMedida"
+          name="idUnidadMedida"
+          value={formValues.idUnidadMedida}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded bg-white"
         >
@@ -194,14 +194,14 @@ const ProductForm: React.FC = () => {
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="precio_lista" className="mb-1 font-semibold text-left">
+        <label htmlFor="precioLista" className="mb-1 font-semibold text-left">
           Precio Lista:
         </label>
         <input
-          id="precio_lista"
+          id="precioLista"
           type="number"
-          name="precio_lista"
-          value={formValues.precio_lista}
+          name="precioLista"
+          value={formValues.precioLista}
           onChange={handleChange}
           step="0.01"
           required
@@ -210,28 +210,28 @@ const ProductForm: React.FC = () => {
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="cod_barra" className="mb-1 font-semibold text-left">
+        <label htmlFor="codBarra" className="mb-1 font-semibold text-left">
           Código Barra:
         </label>
         <input
-          id="cod_barra"
+          id="codBarra"
           type="text"
-          name="cod_barra"
-          value={formValues.cod_barra || ''}
+          name="codBarra"
+          value={formValues.codBarra || ''}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded"
         />
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="sku_alternante" className="mb-1 font-semibold text-left">
+        <label htmlFor="skuAlternante" className="mb-1 font-semibold text-left">
           SKU Alternante:
         </label>
         <input
-          id="sku_alternante"
+          id="skuAlternante"
           type="text"
-          name="sku_alternante"
-          value={formValues.sku_alternante || ''}
+          name="skuAlternante"
+          value={formValues.skuAlternante || ''}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded"
         />
