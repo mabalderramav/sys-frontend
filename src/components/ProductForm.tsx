@@ -3,31 +3,30 @@ import {
   useCreateProductMutation,
   useFetchFabricantesQuery,
   useFetchGruposQuery,
-  useFetchProveedoresQuery
+  useFetchProveedoresQuery,
+  useFetchUnidadMedidaQuery
 } from '../api/productsApi';
 import { ProductRequest } from '../api/request/types';
 
-const UNIDADES = [
-  { id: 1, unidad: 'Litros' },
-  { id: 1, unidad: 'Kilogramos' }
-];
 const ProductForm: React.FC = () => {
   const { data: fabricantes = [], isLoading: fabricantesLoading } = useFetchFabricantesQuery();
   const { data: proveedores = [], isLoading: proveedoresLoading } = useFetchProveedoresQuery();
   const { data: grupos = [], isLoading: gruposLoading } = useFetchGruposQuery();
+  const { data: unidades = [], isLoading: unidadLoading } = useFetchUnidadMedidaQuery();
+
   const [createProduct] = useCreateProductMutation();
   const [formValues, setFormValues] = useState<ProductRequest>({
     sku: '',
     nombre: '',
-    nombreExtranjero: '',
-    codGrupoProducto: '',
-    idFabricante: 0,
-    idProveedor: 0,
+    nombre_extranjero: '',
+    cod_grupo_producto: '',
+    id_fabricante: 0,
+    id_proveedor: 0,
     peso: 0,
-    idUnidadMedida: 0,
-    precioLista: 0,
-    codBarra: '',
-    skuAlternante: ''
+    id_unidad_medida: 0,
+    precio_lista: 0,
+    cod_barra: '',
+    sku_alternante: ''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -48,7 +47,7 @@ const ProductForm: React.FC = () => {
     }
   };
 
-  if (fabricantesLoading || proveedoresLoading || gruposLoading) {
+  if (fabricantesLoading || proveedoresLoading || gruposLoading || unidadLoading) {
     return <div>Loading...</div>;
   }
 
@@ -85,14 +84,14 @@ const ProductForm: React.FC = () => {
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="nombreExtranjero" className="mb-1 font-semibold text-left">
+        <label htmlFor="nombre_extranjero" className="mb-1 font-semibold text-left">
           Nombre Extranjero:
         </label>
         <input
-          id="nombreExtranjero"
+          id="nombre_extranjero"
           type="text"
-          name="nombreExtranjero"
-          value={formValues.nombreExtranjero || ''}
+          name="nombre_extranjero"
+          value={formValues.nombre_extranjero || ''}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded"
         />
@@ -105,7 +104,7 @@ const ProductForm: React.FC = () => {
         <select
           id="cod_grupo_producto"
           name="cod_grupo_producto"
-          value={formValues.codGrupoProducto || ''}
+          value={formValues.cod_grupo_producto || ''}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded bg-white"
         >
@@ -125,7 +124,7 @@ const ProductForm: React.FC = () => {
         <select
           id="id_fabricante"
           name="id_fabricante"
-          value={formValues.idFabricante}
+          value={formValues.id_fabricante}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded bg-white"
         >
@@ -145,7 +144,7 @@ const ProductForm: React.FC = () => {
         <select
           id="id_proveedor"
           name="id_proveedor"
-          value={formValues.idProveedor}
+          value={formValues.id_proveedor}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded bg-white"
         >
@@ -181,12 +180,12 @@ const ProductForm: React.FC = () => {
         <select
           id="id_unidad_medida"
           name="id_unidad_medida"
-          value={formValues.idUnidadMedida}
+          value={formValues.id_unidad_medida}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded bg-white"
         >
           <option value="">Seleccionar</option>
-          {UNIDADES.map((unidad) => (
+          {unidades.map((unidad) => (
             <option key={unidad.id} value={unidad.id}>
               {unidad.unidad}
             </option>
@@ -202,7 +201,7 @@ const ProductForm: React.FC = () => {
           id="precio_lista"
           type="number"
           name="precio_lista"
-          value={formValues.precioLista}
+          value={formValues.precio_lista}
           onChange={handleChange}
           step="0.01"
           required
@@ -218,7 +217,7 @@ const ProductForm: React.FC = () => {
           id="cod_barra"
           type="text"
           name="cod_barra"
-          value={formValues.codBarra || ''}
+          value={formValues.cod_barra || ''}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded"
         />
@@ -232,7 +231,7 @@ const ProductForm: React.FC = () => {
           id="sku_alternante"
           type="text"
           name="sku_alternante"
-          value={formValues.skuAlternante || ''}
+          value={formValues.sku_alternante || ''}
           onChange={handleChange}
           className="p-2 border border-gray-300 rounded"
         />

@@ -1,13 +1,13 @@
 export interface ProductRequest {
   sku: string;
   nombre: string;
-  nombreExtranjero?: string;
-  codGrupoProducto: string;
-  idFabricante: number;
-  idProveedor: number;
+  nombre_extranjero?: string;
+  cod_grupo_producto: string;
+  id_fabricante: number;
+  id_proveedor: number;
   peso: number;
-  idUnidadMedida: number;
-  precioLista: number;
-  codBarra?: string;
-  skuAlternante?: string;
+  id_unidad_medida: number;
+  precio_lista: number;
+  cod_barra?: string;
+  sku_alternante?: string;
 }
