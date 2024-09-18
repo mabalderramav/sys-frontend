@@ -1,11 +1,15 @@
 import { ProductRequest } from './request/types';
 import { systemApi } from './baseQuery';
-import { Fabricante, GrupoProducto, Proveedor, UnidadMedida } from './request/response/types';
+import { Fabricante, GrupoProducto, Producto, Proveedor, UnidadMedida } from './response/types';
 
 const productsApi = systemApi.injectEndpoints({
   endpoints: (builder) => ({
     fetchProductBySku: builder.query<string, string>({
       query: (sku) => ({ url: `producto/${sku}`, method: 'get' })
+    }),
+    fetchProducts: builder.query<Producto[], void>({
+      query: () => ({ url: 'producto', method: 'get' }),
+      transformResponse: (response: { data: Producto[] }) => response.data
     }),
     createProduct: builder.mutation<
       string,
@@ -44,5 +48,6 @@ export const {
   useFetchFabricantesQuery,
   useFetchGruposQuery,
   useFetchProveedoresQuery,
-  useFetchUnidadMedidaQuery
+  useFetchUnidadMedidaQuery,
+  useFetchProductsQuery
 } = productsApi;
