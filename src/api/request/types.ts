@@ -11,3 +11,11 @@ export interface ProductRequest {
   codBarra?: string;
   skuAlternante?: string;
 }
+
+export interface ClientRequest {
+  code: string;
+  name: string;
+  ciNit: string;
+  documentType: string;
+  email: string;
+}

@@ -1,4 +1,4 @@
-import { ProductRequest } from './request/types';
+import { ClientRequest, ProductRequest } from './request/types';
 import { systemApi } from './baseQuery';
 import { Fabricante, GrupoProducto, Producto, Proveedor, UnidadMedida } from './response/types';
 
@@ -37,6 +37,18 @@ const productsApi = systemApi.injectEndpoints({
     fetchUnidadMedida: builder.query<UnidadMedida[], void>({
       query: () => ({ url: 'unidad-medida', method: 'get' }),
       transformResponse: (response: { data: UnidadMedida[] }) => response.data
+    }),
+    createClient: builder.mutation<
+      string,
+      {
+        request: ClientRequest;
+      }
+    >({
+      query: ({ request }) => ({
+        url: 'clientes',
+        data: request,
+        method: 'post'
+      })
     })
   }),
   overrideExisting: false
@@ -49,5 +61,6 @@ export const {
   useFetchGruposQuery,
   useFetchProveedoresQuery,
   useFetchUnidadMedidaQuery,
-  useFetchProductsQuery
+  useFetchProductsQuery,
+  useCreateClientMutation
 } = productsApi;

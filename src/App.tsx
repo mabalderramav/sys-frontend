@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import ProductForm from './components/ProductForm';
 import ProductList from './components/ProductList';
+import RegisterClient from './components/RegisterClient';
 const App: React.FC = () => {
   return (
     <Router>
@@ -11,12 +12,17 @@ const App: React.FC = () => {
           <ul className="flex space-x-4">
             <li>
               <Link to="/" className="text-blue-500 hover:underline">
-                New Product
+                Registrar Producto
               </Link>
             </li>
             <li>
               <Link to="/list" className="text-blue-500 hover:underline">
-                Product List
+                Lista de Productos
+              </Link>
+            </li>
+            <li>
+              <Link to="/clientes" className="text-blue-500 hover:underline">
+                Registrar Cliente
               </Link>
             </li>
           </ul>
@@ -25,6 +31,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<ProductForm />} />
           <Route path="/list" element={<ProductList />} />
+          <Route path="/clientes" element={<RegisterClient />} />
           <Route path="*" element={<div>Page Not Found</div>} />
         </Routes>
       </div>
