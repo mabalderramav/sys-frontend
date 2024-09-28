@@ -70,7 +70,9 @@ const ProductForm: React.FC = () => {
 
   return (
     <>
-      <Notification message={message} show= {show} setShow={setShow}  type='success' />
+      <Notification message={message} show={show} setShow={setShow} type="success" />
+      <h2 className="text-xl font-semibold mb-4">New Product</h2>
+
       <form onSubmit={handleSubmit} className="space-y-4 p-4 max-w-xl mx-auto bg-white shadow-md rounded-lg">
         <div className="flex flex-col">
           <label htmlFor="sku" className="mb-1 font-semibold text-left">
