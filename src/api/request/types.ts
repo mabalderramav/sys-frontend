@@ -19,3 +19,18 @@ export interface ClientRequest {
   documentType: string;
   email: string;
 }
+
+
+export interface InvoiceRequest {
+  clientCode: string;
+  paymentCondition: string;
+  total : number
+  productsItem:  InvoiceItemRequest [];
+}
+export interface InvoiceItemRequest {
+  code: string;
+  name: string;
+  amount: number;
+  price: number;
+  subTotal: number;
+}

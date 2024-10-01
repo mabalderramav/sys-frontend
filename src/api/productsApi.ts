@@ -1,4 +1,4 @@
-import { ClientRequest, ProductRequest } from './request/types';
+import { ClientRequest, ProductRequest,InvoiceRequest } from './request/types';
 import { systemApi } from './baseQuery';
 import { Fabricante, GrupoProducto, Producto, Proveedor, UnidadMedida } from './response/types';
 
@@ -49,6 +49,18 @@ const productsApi = systemApi.injectEndpoints({
         data: request,
         method: 'post'
       })
+    }),
+    createInvoice: builder.mutation<
+      string,
+      {
+        request: InvoiceRequest;
+      }
+    >({
+      query: ({ request }) => ({
+        url: 'sales',
+        data: request,
+        method: 'post'
+      })
     })
   }),
   overrideExisting: false
@@ -59,8 +71,9 @@ export const {
   useCreateProductMutation,
   useFetchFabricantesQuery,
   useFetchGruposQuery,
-  useFetchProveedoresQuery,
+  useFetchProveedoresQuery, 
   useFetchUnidadMedidaQuery,
   useFetchProductsQuery,
-  useCreateClientMutation
+  useCreateClientMutation,
+  useCreateInvoiceMutation
 } = productsApi;
