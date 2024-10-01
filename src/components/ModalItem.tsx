@@ -54,7 +54,7 @@ const ModalItem: React.FC<ModalItemProps> = ({ open, setOpen, getProduct }) => {
                   {products.length === 0 ? (
                     <p>No hay productos registrados.</p>
                   ) : (
-                    <table className="mt-5 mb-2 overflow-auto" width="100%">
+                    <table data-testid='tableProducts' className="mt-5 mb-2 overflow-auto" width="100%">
                       <thead>
                         <tr className="bg-gray-200">
                           <th className="px-4 py-2 text-left">Código</th>
@@ -71,6 +71,7 @@ const ModalItem: React.FC<ModalItemProps> = ({ open, setOpen, getProduct }) => {
                             <td className="px-4 py-2">{product.price}</td>
                             <td>
                               <button
+                                data-testid={"btnGetProduct-"+product.codeProduct }
                                 type="button"
                                 className="px-4 py-2 bg-blue-100 text-white rounded hover:bg-blue-300"
                                 onClick={() => {

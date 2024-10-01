@@ -130,7 +130,7 @@ const RegisterInvoice: FC = () => {
     } else {
       actions.setSubmitting(false);
       setTypeNotif("warning");
-      setMessage("Deber agregar productos");
+      setMessage("Debe agregar productos");
       setShow(true);
     }
   };

@@ -1,5 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react';
-import { render } from '@testing-library/react';
+import { render,act } from '@testing-library/react';
 import RegisterInvoice from '../components/RegisterInvoice';
 import { Provider } from 'react-redux';
 import { store } from '../api/store';
@@ -14,52 +14,100 @@ describe('App test Register Invoice', () => {
     })
 
 
-    it('renders invoice header the form with all required fields', () => {      
+    it('renders invoice header the form with all fields', () => {      
       expect(screen.getByLabelText(/Código Cliente:/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/Nombre Cliente:/i)).toBeInTheDocument();      
       expect(screen.getByLabelText(/Condición Pago:/i)).toBeInTheDocument();
     //   expect(screen.getByRole('button', { name: /Registrar Cliente/i })).toBeInTheDocument();
     });
 
-    // it('shows an error if the email format is invalid', async () => {
-    //   render(
-    //     <Provider store={store}>
-    //       <RegisterClient />
-    //     </Provider>
-    //   );
-    //   fireEvent.change(screen.getByLabelText(/Email:/i), { target: { value: 'invalid-email' } });
-    //   fireEvent.click(screen.getByRole('button', { name: /Registrar Cliente/i }));
+    it('shows an error if the code and name client is required', async () => {
+      
+      fireEvent.change(screen.getByLabelText(/Código Cliente:/i), { target: { value: '' } });
+      fireEvent.change(screen.getByLabelText(/Nombre Cliente:/i), { target: { value: '' } });
+      fireEvent.click(screen.getByRole('button', { name: /Registrar Factura/i }));
+      // Expect an error message
+      screen.debug();
+      expect(await screen.findByText(/Código de Cliente es requerido/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Nombre de Cliente es requerido/i)).toBeInTheDocument();
+    });
+
+
+    it('display modal press button Agregar Producto', async () => {
+      fireEvent.click(screen.getByRole('button', { name: /Agregar Producto/i }));
+      // Expect an error message
+      expect(await screen.findByText(/Lista de Productos/i)).toBeInTheDocument();
+    });
+
+    // it('add product with code 1 from modal to Detalle', async () => {
+      
+    //   fireEvent.click(screen.getByRole('button', { name: /Agregar Producto/i }));
+    //   fireEvent.click(screen.getByTestId('btnGetProduct-1'));
     //   // Expect an error message
-    //   screen.debug();
-    //   expect(await screen.findByText(/Formato de email invalido/i)).toBeInTheDocument();
+    //   expect(await screen.findByText(/Lista de Productos/i)).toBeInTheDocument();
     // });
-    // it('shows an error if CI/NIT is not numeric', async () => {
-    //   render(
-    //     <Provider store={store}>
-    //       <RegisterClient />
-    //     </Provider>
-    //   );
-    //   fireEvent.change(screen.getByLabelText(/Nro. CI\/NIT:/i), { target: { value: 'non-numeric' } });
-    //   fireEvent.click(screen.getByRole('button', { name: /Registrar Cliente/i }));
+
+    // it('button plus minus quantity product', async () => {
+      
+    //   fireEvent.click(screen.getByRole('button', { name: /Agregar Producto/i }));
+    //   fireEvent.click(screen.getByTestId('btnGetProduct-1'));
     //   // Expect an error message
-    //   expect(await screen.findByText(/CI\/NIT solo acepta numeros/i)).toBeInTheDocument();
+    //   // expect(await screen.findByText(/Lista de Productos/i)).toBeInTheDocument();
     // });
+
+    it('add repeated product to Detalle', async () => {
+      
+      // Display modal Products
+      fireEvent.click(screen.getByRole('button', { name: /Agregar Producto/i }));
+      await  act ( async () => { 
+        await  new  Promise ( ( resolve ) =>  setTimeout (resolve, 300 )); 
+      });
+      // Select Product Code 1
+      fireEvent.click(screen.getByTestId('btnGetProduct-1'));
+      await  act ( async () => { 
+        await  new  Promise ( ( resolve ) =>  setTimeout (resolve, 300 )); 
+      });
+      fireEvent.click(screen.getByRole('button', { name: /Agregar Producto/i }));
+      await  act ( async () => { 
+        await  new  Promise ( ( resolve ) =>  setTimeout (resolve, 300 )); 
+      });
+      // Select Product Code 1
+      fireEvent.click(screen.getByTestId('btnGetProduct-1'));
+      expect(await screen.findByText(/El producto ya ha sido seleccionado/i)).toBeInTheDocument();
+
+    });
+
+    it('register invoice without detalle', async () => {      
+      // Input valid values
+      fireEvent.change(screen.getByLabelText(/Código Cliente:/i), { target: { value: '3' } });
+      fireEvent.change(screen.getByLabelText(/Nombre Cliente:/i), { target: { value: 'Juan Pérez' } });
+      fireEvent.change(screen.getByLabelText(/Condición Pago:/i), { target: { value: 'Tarjeta' } });
+     
+      // Submit the form
+      fireEvent.click(screen.getByRole('button', { name: /Registrar Factura/i }));
+      // Expect a success message after submitting
+      expect(await screen.findByText(/Debe agregar productos/i)).toBeInTheDocument();
+    });
   
-    // it('submits the form with valid data', async () => {
-    //   render(
-    //     <Provider store={store}>
-    //       <RegisterClient />
-    //     </Provider>
-    //   );
-    //   // Input valid values
-    //   fireEvent.change(screen.getByLabelText(/Código:/i), { target: { value: '001' } });
-    //   fireEvent.change(screen.getByLabelText(/Nombre:/i), { target: { value: 'John Doe' } });
-    //   fireEvent.change(screen.getByLabelText(/Nro. CI\/NIT:/i), { target: { value: '123456' } });
-    //   fireEvent.change(screen.getByLabelText(/Tp Doc:/i), { target: { value: 'Passport' } });
-    //   fireEvent.change(screen.getByLabelText(/Email:/i), { target: { value: 'john@example.com' } });
-    //   // Submit the form
-    //   fireEvent.click(screen.getByRole('button', { name: /Registrar Cliente/i }));
-    //   // Expect a success message after submitting
-    //   expect(await screen.findByText(/Cargando.../i)).toBeInTheDocument();
-    // });
+    it('submits the form with valid data', async () => {
+
+      // Input valid values
+      fireEvent.change(screen.getByLabelText(/Código Cliente:/i), { target: { value: '3' } });
+      fireEvent.change(screen.getByLabelText(/Nombre Cliente:/i), { target: { value: 'Juan Pérez' } });
+      fireEvent.change(screen.getByLabelText(/Condición Pago:/i), { target: { value: 'Tarjeta' } });
+      // Display modal Products
+      fireEvent.click(screen.getByRole('button', { name: /Agregar Producto/i }));
+      await  act ( async () => { 
+        await  new  Promise ( ( resolve ) =>  setTimeout (resolve, 300 )); 
+      });
+      // Select Product Code 1
+      fireEvent.click(screen.getByTestId('btnGetProduct-1'));
+      // Submit the form
+      await  act ( async () => { 
+        await  new  Promise ( ( resolve ) =>  setTimeout (resolve, 300 )); 
+      });
+      fireEvent.click(screen.getByRole('button', { name: /Registrar Factura/i }));
+      // Expect a success message after submitting
+      expect(await screen.findByText(/Cargando.../i)).toBeInTheDocument();
+    });
   });
