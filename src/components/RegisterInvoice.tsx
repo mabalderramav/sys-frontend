@@ -6,8 +6,7 @@ import { FC, useState, useEffect, useRef } from "react";
 import * as Yup from "yup";
 import {
   InvoiceItemRequest,
-  InvoiceRequest,
-  ClientRequest,
+  InvoiceRequest
 } from "../api/request/types";
 import { useCreateInvoiceMutation, useFetchClientByCodeQuery } from "../api/productsApi";
 import Notification from "./Notification";
