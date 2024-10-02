@@ -103,7 +103,7 @@ const RegisterInvoice: FC = () => {
     payCondition: Yup.string().required("Condición de Pago es requerido"),
   });
 
-  const onSubmit = (values: any, { resetForm, setSubmitting }: FormikHelpers<ClientRequest>) => {
+  const onSubmit = (values: any, { resetForm, setSubmitting }: FormikHelpers<any>) => {
     console.log(values);
     console.log(products);
     if (products.length > 0) {
