@@ -1,38 +1,53 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useRef, useEffect } from 'react';
+import { Formik, Form, Field, ErrorMessage, FormikHelpers  } from "formik";
 import { FC, useState } from "react";
 import * as Yup from "yup";
 import { ClientRequest } from "../api/request/types";
 import { useCreateClientMutation } from "../api/productsApi";
 import Notification from "./Notification";
 
+const generateNumericId = () => {
+  return (Math.floor(100000000 + Math.random() * 900000000)).toString(); // Genera un número entre 100000000 y 999999999
+};
+
 const RegisterClient: FC = () => {
   const initialValues: ClientRequest = {
-    code: "",
-    name: "",
-    ciNit: "",
-    documentType: "",
-    email: "",
+    code: generateNumericId(),
+    name: '',
+    ciNit: '',
+    documentType: 'CI',
+    email: '',
   };
   const [show, setShow] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const [createCliente] = useCreateClientMutation();
   const validationSchema = Yup.object({
-    code: Yup.string().required("Código es requerido"),
-    name: Yup.string().required("Nombre es requerido"),
+    code: Yup.string().required('Código es requerido'),
+    name: Yup.string().required('Nombre es requerido'),
     ciNit: Yup.number()
-      .typeError("CI/NIT solo acepta numeros")
-      .required("CI/NIT es requerido"),
-    documentType: Yup.string().required("Tp Doc es requerido"),
+      .typeError('CI/NIT solo acepta numeros')
+      .required('CI/NIT es requerido'),
+    documentType: Yup.string().required('Tp Doc es requerido'),
     email: Yup.string()
-      .email("Formato de email invalido")
-      .required("El email es requerido"),
+      .email('Formato de email invalido')
+      .required('El email es requerido'),
   });
+  const nameRef = useRef<HTMLInputElement>(null);
 
-  const onSubmit = (values: ClientRequest) => {
+  useEffect(() => {
+    if (nameRef.current) {
+      nameRef.current.focus(); // Aplica el enfoque al campo
+    }
+  }, []);
+
+  const onSubmit = (values: ClientRequest, { resetForm, setSubmitting, setFieldValue }: FormikHelpers<ClientRequest>) => {
     try {
       createCliente({ request: values }).unwrap();
       setMessage("Guardado correctamente");
       setShow(true);
+      resetForm();
+      setSubmitting(false);
+      setFieldValue('code', generateNumericId());
     } catch (error) {
       console.error("Failed to register product", error);
     }
@@ -66,6 +81,7 @@ const RegisterClient: FC = () => {
                 id="code"
                 name="code"
                 type="text"
+                disabled
                 className="p-2 border border-gray-300 rounded"
               />
               <ErrorMessage
@@ -83,6 +99,7 @@ const RegisterClient: FC = () => {
                 name="name"
                 type="text"
                 className="p-2 border border-gray-300 rounded"
+                innerRef={nameRef}
               />
               <ErrorMessage
                 name="name"
@@ -110,12 +127,16 @@ const RegisterClient: FC = () => {
               <label htmlFor="documentType" className="mb-1 font-semibold">
                 Tp Doc:
               </label>
+              {/* <Field id="documentType" name="documentType" type="text" className="p-2 border border-gray-300 rounded" /> */}
               <Field
                 id="documentType"
                 name="documentType"
-                type="text"
-                className="p-2 border border-gray-300 rounded"
-              />
+                as="select"
+                className="p-2 border border-gray-300 rounded bg-white"
+              >
+                <option value="CI">CI</option>
+                <option value="NIT">NIT</option>
+              </Field>
               <ErrorMessage
                 name="documentType"
                 component="div"

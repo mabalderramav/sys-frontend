@@ -36,3 +36,12 @@ export interface Producto {
   cod_barra?: string;
   sku_alternante?: string;
 }
+
+export interface Client {
+  id: number;
+  code: string;
+  name: string;
+  ciNit: string;
+  documentType: string;
+  email: string;
+}

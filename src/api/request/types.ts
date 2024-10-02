@@ -20,12 +20,11 @@ export interface ClientRequest {
   email: string;
 }
 
-
 export interface InvoiceRequest {
   clientCode: string;
-  paymentCondition: string;
-  total : number
-  productsItem:  InvoiceItemRequest [];
+  payCondition: string;
+  total: number;
+  productsItem: InvoiceItemRequest[];
 }
 export interface InvoiceItemRequest {
   code: string;
