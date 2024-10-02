@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import ProductForm from './components/ProductForm';
+// import ProductForm from './components/ProductForm';
 import ProductList from './components/ProductList';
 import RegisterClient from './components/RegisterClient';
 import RegisterInvoice from './components/RegisterInvoice';
@@ -11,16 +11,6 @@ const App: React.FC = () => {
         {/* Navigation Links */}
         <nav className="mb-4">
           <ul className="flex space-x-4">
-            <li>
-              <Link to="/" className="text-blue-500 hover:underline">
-                Registrar Producto
-              </Link>
-            </li>
-            <li>
-              <Link to="/list" className="text-blue-500 hover:underline">
-                Lista de Productos
-              </Link>
-            </li>
             <li>
               <Link to="/clientes" className="text-blue-500 hover:underline">
                 Registrar Cliente
@@ -35,7 +25,7 @@ const App: React.FC = () => {
         </nav>
         {/* Routes */}
         <Routes>
-          <Route path="/" element={<ProductForm />} />
+          <Route path="/" element={<RegisterClient />} />
           <Route path="/list" element={<ProductList />} />
           <Route path="/clientes" element={<RegisterClient />} />
           <Route path="/facturas" element={<RegisterInvoice />} />
