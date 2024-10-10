@@ -19,4 +19,5 @@ jobs:
       run: npm run build
 
     - name: Start React.js server
-      run: npm run start &
+      run: Start-Process npm run start
+      # run: npm run start &    para linux
