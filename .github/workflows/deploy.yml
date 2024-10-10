@@ -18,6 +18,9 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Start React.js server
-      run: Start-Process npm run start
+    - name: Start Vite server in production mode
+      run: |
+        Start-Job -ScriptBlock { npm run start }
+        sleep 10
+
       # run: npm run start &    para linux
