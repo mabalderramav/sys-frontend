@@ -19,9 +19,9 @@ jobs:
       run: npm run build
 
     - name: Start Vite server in production mode
-      shell: cmd
+      shell: powershell
       run: |
-        start /min cmd /c "npm run start"
-        timeout /t 5
+        Start-Process -NoNewWindow -FilePath "npm" -ArgumentList "run start"
+        Start-Sleep -Seconds 5
 
       # run: npm run start &    para linux
