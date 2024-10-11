@@ -13,7 +13,7 @@ const App: React.FC = () => {
           <ul className="flex space-x-4">
             <li>
               <Link to="/clientes" className="text-blue-500 hover:underline">
-                Registrar Cliente
+                Registrar nuevo Cliente
               </Link>
             </li>
             <li>
