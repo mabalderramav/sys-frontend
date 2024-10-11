@@ -19,5 +19,9 @@ jobs:
       run: npm run build
 
     - name: Start Vite server in production mode
-      run: npm run start
+      shell: pwsh
+      run: |
+        Start-Job -ScriptBlock { npm run start }
+        Start-Sleep -Seconds 5
+
       # run: npm run start &    para linux
