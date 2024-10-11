@@ -21,7 +21,7 @@ jobs:
     - name: Start Vite server in production mode
       shell: cmd
       run: |
-        start "" cmd /c "npm run start"
+        start /min cmd /c "npm run start"
         timeout /t 5
 
       # run: npm run start &    para linux
