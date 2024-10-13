@@ -21,7 +21,7 @@ jobs:
     - name: Start Vite server in production mode
       shell: powershell
       run: |
-        cmd /c "npm run preview"
-        Start-Sleep -Seconds 5
+        start /B cmd /c "npm run preview -- --port 3000"
+        timeout /t 5
 
       # run: npm run start &    para linux
