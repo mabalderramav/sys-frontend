@@ -21,7 +21,7 @@ jobs:
     - name: Start Vite server in production mode
       shell: powershell
       run: |
-        Start-Job -ScriptBlock { Invoke-Expression "npm run start" }
+        Start-Process "npm" -ArgumentList "run start" -NoNewWindow
         Start-Sleep -Seconds 5
 
       # run: npm run start &    para linux
