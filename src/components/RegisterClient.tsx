@@ -55,7 +55,7 @@ const RegisterClient: FC = () => {
 
   return (
     <div className="p-4 max-w-md mx-auto bg-white shadow-md rounded-lg">
-      <h2 className="text-xl font-semibold mb-4">Registrar Cliente</h2>
+      <h2 className="text-xl font-semibold mb-4">Registrar Nuevo Cliente</h2>
       <Notification
         message={message}
         show={show}

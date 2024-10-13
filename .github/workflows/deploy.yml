@@ -17,11 +17,3 @@ jobs:
 
     - name: Build project
       run: npm run build
-
-    - name: Start Vite server in production mode
-      shell: powershell
-      run: |
-        Start-Job -ScriptBlock { cmd /c "npm run preview -- --port 3000" }
-        Start-Sleep -Seconds 5
-
-      # run: npm run start &    para linux
