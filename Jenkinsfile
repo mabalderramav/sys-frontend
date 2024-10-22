@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        NODE_ENV = 'production'
         BUILD_DIR = 'dist'
         PORT = '3000'
         VITE_BASE_URL = 'http://localhost:3050/api'
