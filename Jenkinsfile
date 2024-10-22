@@ -18,7 +18,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
-                bat 'npm install typescript --save-dev'
+                bat 'npm install -g typescript'
             }
         }
         stage('Build with Vite') {
