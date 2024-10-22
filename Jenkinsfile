@@ -20,14 +20,9 @@ pipeline {
                 bat 'npm install'
             }
         }
-        // stage('Compile TypeScript') {
-        //     steps {
-        //         bat 'npx tsc'
-        //     }
-        // }
         stage('Build with Vite') {
             steps {
-                bat 'npm run build'
+                bat 'npx tsc -b && npx vite build'
             }
         }
         stage('Deploy with PM2') {
