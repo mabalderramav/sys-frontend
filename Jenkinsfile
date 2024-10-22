@@ -20,6 +20,11 @@ pipeline {
                 bat 'npm install'
             }
         }
+        stage('Compile TypeScript') {
+            steps {
+                bat 'npx tsc'
+            }
+        }
         stage('Build with Vite') {
             steps {
                 bat 'npm run build'
