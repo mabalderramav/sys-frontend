@@ -16,7 +16,6 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
-                bat 'npm install -g typescript'
             }
         }
         stage('Build with Vite') {
@@ -28,19 +27,12 @@ pipeline {
             steps {
                 script {
                     try {
-                        // Detener cualquier instancia anterior de la aplicación servida con PM2
                         bat 'pm2 stop sys-frontend || echo "No previous instance running"'
                         bat 'pm2 delete sys-frontend || echo "No previous instance to delete"'
                     } catch (Exception e) {
                         echo 'No previous app instance running or failed to stop'
                     }
-
-                    // Iniciar la aplicación en segundo plano usando PM2
-                    // bat "pm2 start npx --name 'sys-frontend' -- serve -s ${BUILD_DIR} -l 3000"
-                    // bat 'pm2 start serve --name "sys-frontend" -- dist -l %PORT%'
                     bat 'pm2 serve dist %PORT% --name "sys-frontend" --spa'
-
-                    // Guardar el estado de PM2 para recuperación automática
                     bat 'pm2 save'
                 }
             }
