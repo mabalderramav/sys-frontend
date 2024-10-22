@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        BUILD_DIR = 'dist'
         PORT = '3000'
         VITE_BASE_URL = 'http://localhost:3050/api'
         PM2_HOME = 'C:\\tools\\.pm2'
@@ -38,8 +37,8 @@ pipeline {
 
                     // Iniciar la aplicación en segundo plano usando PM2
                     // bat "pm2 start npx --name 'sys-frontend' -- serve -s ${BUILD_DIR} -l 3000"
-                    // bat 'pm2 start serve --name "sys-frontend" -- ${BUILD_DIR} -l %PORT%'
-                    bat 'pm2 serve ${BUILD_DIR} %PORT% --name "sys-frontend" --spa'
+                    bat 'pm2 start serve --name "sys-frontend" -- dist -l %PORT%'
+                    // bat 'pm2 serve %BUILD_DIR% %PORT% --name "sys-frontend" --spa'
 
                     // Guardar el estado de PM2 para recuperación automática
                     bat 'pm2 save'
