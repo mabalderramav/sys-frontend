@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/enunez-dev/sys-frontend.git', branch: 'deploy-edward'
+                git url: 'https://github.com/enunez-dev/sys-frontend.git', branch: 'master'
             }
         }
         stage('Install Dependencies') {
