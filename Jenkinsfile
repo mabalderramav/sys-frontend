@@ -10,12 +10,38 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/enunez-dev/sys-frontend.git', branch: 'deploy-edward'
+                git url: 'https://github.com/enunez-dev/sys-frontend.git', branch: 'master'
             }
         }
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
+            }
+        }
+        stage('Find PM2 Path') {
+            steps {
+                script {
+                    // Capturar el nombre de usuario actual usando PowerShell
+                    def loggedUser = bat(script: 'powershell -Command "(Get-WmiObject -Class Win32_ComputerSystem).UserName.Split(\'\\\\\')[1]"', returnStdout: true).trim()
+                    loggedUser = loggedUser.split("\r\n")[-1].trim()
+                    echo "loggedUser: ${loggedUser}"
+                    // Intentar encontrar pm2 en una ruta común de instalación global
+                    def possiblePm2Paths = [
+                        "C:\\Users\\${loggedUser}\\AppData\\Roaming\\npm\\pm2.cmd",
+                        "C:\\Program Files\\nodejs\\pm2.cmd",
+                    ]
+                    echo "possiblePm2Paths: ${possiblePm2Paths}"
+                    def foundPm2Path = possiblePm2Paths.find { path ->
+                        fileExists(path)
+                    }
+
+                    if (foundPm2Path) {
+                        env.PM2_PATH = foundPm2Path
+                        echo "PM2 se encuentra en: ${env.PM2_PATH}"
+                    } else {
+                        error "No se pudo encontrar la ruta de PM2 en las ubicaciones conocidas"
+                    }
+                }
             }
         }
         stage('Build with Vite') {
@@ -27,13 +53,16 @@ pipeline {
             steps {
                 script {
                     try {
-                        bat 'pm2 stop sys-frontend || echo "No previous instance running"'
-                        bat 'pm2 delete sys-frontend || echo "No previous instance to delete"'
+                        // Detener cualquier instancia anterior
+                        bat "\"${env.PM2_PATH}\" stop sys-frontend || echo \"No previous app instance running\""
+                        bat "\"${env.PM2_PATH}\" delete sys-frontend || echo \"No previous app instance to delete\""
                     } catch (Exception e) {
                         echo 'No previous app instance running or failed to stop'
                     }
-                    bat 'pm2 serve dist %PORT% --name "sys-frontend" --spa'
-                    bat 'pm2 save'
+                    // Iniciar la aplicación con PM2 en segundo plano
+                    bat "\"${env.PM2_PATH}\" serve dist %PORT% --name \"sys-frontend\" --spa"
+                    // Guardar la lista de procesos de PM2
+                    bat "\"${env.PM2_PATH}\" save"
                 }
             }
         }
