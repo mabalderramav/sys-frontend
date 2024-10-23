@@ -80,7 +80,7 @@ Para configurar el despliegue automatizado con Jenkins, sigue los pasos a contin
 
 ## Uso
 
-Una vez en funcionamiento, la API estará disponible en http://localhost:3000 (o el puerto configurado). A continuación, se encuentran ejemplos de las rutas:
+Una vez en funcionamiento, el proyecto web estará disponible en http://localhost:3000 (o el puerto configurado). A continuación, se encuentran ejemplos de las rutas:
 
 ## Licencia
 
