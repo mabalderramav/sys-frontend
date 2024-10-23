@@ -14,7 +14,8 @@ Este proyecto fue creado con [Vite] (https://vite.dev/) es una herramienta de co
 
 ## Prerrequisitos
 
-Antes de comenzar, asegúrate de tener instalados los siguientes requisitos:
+1. Puerto 3000 debe estar disponible.
+2. Antes de comenzar, asegúrate de tener instalados los siguientes requisitos:
 
 - [Node.js](https://nodejs.org/) (versión 20 o superior)
 - [npm](https://www.npmjs.com/) o [Yarn](https://yarnpkg.com/)
@@ -72,7 +73,7 @@ Para configurar el despliegue automatizado con Jenkins, sigue los pasos a contin
   2. Pipeline
      - Definition: Pipeline script from SCM
        - SCM: Git
-         - Repository URL: https://github.com/enunez-dev/sys-backend.git
+         - Repository URL: https://github.com/enunez-dev/sys-frontend.git
          - Branch Specifier: \*/master
        - Script Path: Jenkinsfile
   3. (Save)
