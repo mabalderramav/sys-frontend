@@ -77,18 +77,18 @@ Este proyecto fue creado con [Vite] (https://vite.dev/) es una herramienta de co
     >Asi quedaria configurado NodeJS [Click aqui](https://drive.google.com/file/d/1MRMhUC3FWB-ikVZ1-TILXyuAQL6zBdHf/view?usp=sharing)
 
 - **Configurar un nuevo pipeline**:
-  1. New Item
+  - New Item
      - Name: **sys-backend**
      - Type: Pipeline
-  2. Pipeline
+  - Pipeline
      - Definition: Pipeline script from SCM
        - SCM: Git
          - Repository URL: https://github.com/enunez-dev/sys-frontend.git
          - Branch Specifier: \*/master
        - Script Path: Jenkinsfile
-  3. (Save)
-  4. Build Now
-  >Asi querdaria el pipeline [Click aqui](https://drive.google.com/file/d/1EQM1gaPVtW7OahTaJg0BWETy_9VdjaeU/view?usp=sharing)
+  - (Save)
+  - Build Now
+  >Asi quedaria el pipeline [Click aqui](https://drive.google.com/file/d/1EQM1gaPVtW7OahTaJg0BWETy_9VdjaeU/view?usp=sharing)
 
 
 ## Uso
